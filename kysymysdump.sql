@@ -87,3 +87,6 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2018-02-22 13:20:16
+INSERT INTO kysymys (teksti)
+VALUES ("Missä lajissa Jukka haluaisi saavuttaa mustan vyön?");
+
