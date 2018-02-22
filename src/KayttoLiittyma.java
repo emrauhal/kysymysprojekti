@@ -27,46 +27,16 @@ public class KayttoLiittyma {
     }
 
     private static void kysely(Connection con) throws SQLException {
-        List<Integer> lista = new ArrayList<>();
-        lista.add(1);
-        lista.add(2);
-        lista.add(3);
-        lista.add(4);
-        lista.add(5);
-        lista.add(6);
-        lista.add(7);
-        lista.add(8);
-        lista.add(9);
-        lista.add(10);
-        Collections.shuffle(lista);
+        List<Integer> lista = randomGeneraattori();
 
-        for (int i = 1; i <= lista.size(); i++) {
+        for (int i : lista) {
             tulostaKysymys(con, i);
             int oikea = tulostaKysymysvaihtoehdot(con, i);
 
-            Scanner lukija = new Scanner(System.in);
             System.out.print("Anna vastaus: ");
-            String vastaus;
+            int vastaus = syotteenKasittely();
 
-            while (true) {
-                if (lukija.hasNextLine()) {
-                    vastaus = lukija.nextLine();
-
-                    if (vastaus.equals("1") || vastaus.equals("2") || vastaus.equals("3") || vastaus.equals("4")) {
-                        break;
-                    } else {
-                        System.out.println("Syöte ei kelpaa!");
-                        System.out.print("Anna vastaus: ");
-                        continue;
-                    }
-                } else {
-                    System.out.println("Tyhjä syöte!");
-                    System.out.print("Anna vastaus: ");
-                    continue;
-                }
-            }
-            int vast = Integer.parseInt(vastaus);
-            if (vast == oikea) {
+            if (vastaus == oikea) {
                 System.out.println("Oikein!");
                 System.out.println("\n");
                 oikeatVastaukset ++;
@@ -102,5 +72,45 @@ public class KayttoLiittyma {
             k++;
         }
         return oikea;
+    }
+
+    private static List<Integer> randomGeneraattori() {
+        List<Integer> lista = new ArrayList<>();
+        lista.add(1);
+        lista.add(2);
+        lista.add(3);
+        lista.add(4);
+        lista.add(5);
+        lista.add(6);
+        lista.add(7);
+        lista.add(8);
+        lista.add(9);
+        lista.add(10);
+        Collections.shuffle(lista);
+        return lista;
+    }
+
+    private static int syotteenKasittely() {
+        Scanner lukija = new Scanner(System.in);
+        int v;
+        while (true) {
+            if (lukija.hasNextLine()) {
+                String vastaus = lukija.nextLine();
+
+                if (vastaus.equals("1") || vastaus.equals("2") || vastaus.equals("3") || vastaus.equals("4")) {
+                    v = Integer.parseInt(vastaus);
+                    break;
+                } else {
+                    System.out.println("Syöte ei kelpaa!");
+                    System.out.print("Anna vastaus: ");
+                    continue;
+                }
+            } else {
+                System.out.println("Tyhjä syöte!");
+                System.out.print("Anna vastaus: ");
+                continue;
+            }
+        }
+        return v;
     }
 }
