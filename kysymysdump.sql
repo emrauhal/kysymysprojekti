@@ -37,7 +37,7 @@ CREATE TABLE `kysymys` (
 
 LOCK TABLES `kysymys` WRITE;
 /*!40000 ALTER TABLE `kysymys` DISABLE KEYS */;
-INSERT INTO `kysymys` VALUES (1,'Mikä pari ei kuulu joukkoon?',NULL,NULL),(2,'Mistä urasta Tommi haaveili pikkupoikana?',NULL,NULL),(3,'Mikä seuraavista ei ole RuntimeException luokasta periytyvä poikkeus?',NULL,NULL),(4,'Mikä on Samun secret talent?',NULL,NULL),(5,'Missä lajissa Jukka haluaisi saavuttaa mustan vyön?',NULL,NULL);
+INSERT INTO `kysymys` VALUES (1,'Mikä pari ei kuulu joukkoon?',NULL,NULL),(2,'Mistä urasta Tommi haaveili pikkupoikana?',NULL,NULL),(3,'Mikä seuraavista ei ole RuntimeException luokasta periytyvä poikkeus?',NULL,NULL),(4,'Mikä on Samun secret talent?',NULL,NULL),(5,'Missä lajissa Jukka haluaisi saavuttaa mustan vyön?',NULL,NULL),(6,'Mikä on Maisan motto?',NULL,NULL),(7,'Mikä on Heikin motto?',NULL,NULL),(8,'Mikä laji on Ollille (Vainio) kaikista rakkain?',NULL,NULL),(9,'Missä maineikkaissa yrityksissä Jan on työskennellyt?',NULL,NULL),(10,'Millä nimellä Java tunnettiin alun perin?');
 /*!40000 ALTER TABLE `kysymys` ENABLE KEYS */;
 UNLOCK TABLES;
 
