@@ -16,6 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Current Database: `kysymykset`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `kysymykset` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `kysymykset`;
+
+--
 -- Table structure for table `kysymys`
 --
 
@@ -37,7 +45,7 @@ CREATE TABLE `kysymys` (
 
 LOCK TABLES `kysymys` WRITE;
 /*!40000 ALTER TABLE `kysymys` DISABLE KEYS */;
-INSERT INTO `kysymys` VALUES (1,'Mikä pari ei kuulu joukkoon?',NULL,NULL),(2,'Mistä urasta Tommi haaveili pikkupoikana?',NULL,NULL),(3,'Mikä seuraavista ei ole RuntimeException luokasta periytyvä poikkeus?',NULL,NULL),(4,'Mikä on Samun secret talent?',NULL,NULL),(5,'Missä lajissa Jukka haluaisi saavuttaa mustan vyön?',NULL,NULL),(6,'Mikä on Maisan motto?',NULL,NULL),(7,'Mikä on Heikin motto?',NULL,NULL),(8,'Mikä laji on Ollille (Vainio) kaikista rakkain?',NULL,NULL),(9,'Missä maineikkaissa yrityksissä Jan on työskennellyt?',NULL,NULL),(10,'Millä nimellä Java tunnettiin alun perin?');
+INSERT INTO `kysymys` VALUES (1,'Mikä pari ei kuulu joukkoon?',NULL,NULL),(2,'Mistä urasta Tommi haaveili pikkupoikana?',NULL,NULL),(3,'Mikä seuraavista ei ole RuntimeException luokasta periytyvä poikkeus?',NULL,NULL),(4,'Mikä on Samun secret talent?',NULL,NULL),(5,'Missä lajissa Jukka haluaisi saavuttaa mustan vyön?',NULL,NULL);
 /*!40000 ALTER TABLE `kysymys` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -65,7 +73,7 @@ CREATE TABLE `kysymysvaihtoehdot` (
 
 LOCK TABLES `kysymysvaihtoehdot` WRITE;
 /*!40000 ALTER TABLE `kysymysvaihtoehdot` DISABLE KEYS */;
-INSERT INTO `kysymysvaihtoehdot` VALUES (1,'boolean Boolean',0,1),(2,'long Long',0,1),(3,'double Double',0,1),(4,'string String',1,1),(5,'Palomies',0,2),(6,'Opettaja',1,2),(7,'Asianajaja',0,2),(8,'Tulkki',0,2),(9,'ArtihmeticException',0,3),(10,'ArrayStoreException',0,3),(11,'SecurityException',0,3),(12,'ClassReachException',1,3),(13,'Ulkomailla liftaaminen',1,4),(14,'Kokkaaminen',0,4),(15,'Osaa nimetä kaikki Yhdysvaltojen Osavaltiot',0,4),(16,'Muuttaminen',0,4),(17,'Jujutsu',1,5),(18,'Aikido',0,5),(19,'Ompelu',0,5),(20,'Karate',0,5),(21,'Koti, Uskonto ja Isänmaa!',0,6),(22,'Ihminen ei voi onnistua, jos ei ole valmis ensiksi yrittämään!',0,6),(23,'Se mikä ei tapa, vahvistaa!',0,6),(24,'Ei pidä keskittyä siihen että on paras, vaan siihen että on parempi kuin eilen',1,6),(25,'Doing while learning!',0,7),(26,'Learn, code, conquer!',0,7),(27,'Tulin, näin koodasin!',0,7),(28,'Learning by doing!',1,7),(29,'Futis',1,8),(30,'Jääkiekko',0,8),(31,'Curling',0,8),(32,'Runonlausunta',0,8),(33,'Microsoft ja Nokia',1,9),(34,'Apple ja Nokia',0,9),(35,'Google ja Nokia',0,9),(36,'Amazon ja Twitter',0,9),(37,'Java Only',0,10),(38,'Apple',0,10),(39,'JDK',0,10),(40,'Oak',1,10);
+INSERT INTO `kysymysvaihtoehdot` VALUES (1,'boolean Boolean',0,1),(2,'long Long',0,1),(3,'double Double',0,1),(4,'string String',1,1),(5,'Palomies',0,2),(6,'Opettaja',1,2),(7,'Asianajaja',0,2),(8,'Tulkki',0,2),(9,'ArtihmeticException',0,3),(10,'ArrayStoreException',0,3),(11,'SecurityException',0,3),(12,'ClassReachException',1,3),(13,'Ulkomailla liftaaminen',1,4),(14,'Kokkaaminen',0,4),(15,'Osaa nimetä kaikki Yhdysvaltojen Osavaltiot',0,4),(16,'Muuttaminen',0,4),(17,'Jujutsu',1,5),(18,'Aikido',0,5),(19,'Ompelu',0,5),(20,'Karate',0,5);
 /*!40000 ALTER TABLE `kysymysvaihtoehdot` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -78,4 +86,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-02-22 12:00:21
+-- Dump completed on 2018-02-22 13:20:16
