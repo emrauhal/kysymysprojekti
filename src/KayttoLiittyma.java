@@ -3,35 +3,45 @@ import java.sql.*;
 import java.util.*;
 
 public class KayttoLiittyma {
+    // Oliomuuttujiksi Tietokantahaku-olio sekä staattinen laskuri oikeille vastauksille.
     private static int oikeatVastaukset;
+    private Tietokantahaku t;
 
-    private static void lataaAjuri() throws ClassNotFoundException {
+    // Lataa ajurin, heittää poikkeuksen jos ajuria ei löydy.
+    private void lataaAjuri() throws ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
     }
 
+    // Käyttöliittymän runko, joka tulostaa alku- ja lopputekstit, lataa ajurin ja kutsuu
+    // kysely-metodia itse sisällön tulostamiseen.
     public void kayta() throws ClassNotFoundException {
         System.out.println("Tervetuloa!");
         System.out.println("\n");
         lataaAjuri();
-        try {
-            Connection con = DriverManager.
-                    getConnection("jdbc:mysql://localhost:3306/kysymykset?useSSL=false",
-                            "root", "Academy18");
+
+        // Olisi voinut luoda komentorivillä vielä yhteisen käyttäjän, jolla sama tunnus ja sama salasana.
+        // Tällöin sama koodi toimii jaettuna kaikilla.
+        try (Connection con = DriverManager.
+                getConnection("jdbc:mysql://localhost:3306/kysymykset?useSSL=false",
+                            "root", "Academy18")) {
             kysely(con);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Virhe tietokantayhteyden luomisessa!");
         }
         System.out.println("Sait oikein: " + oikeatVastaukset);
         System.out.println("Kiitos käynnistä ja tervetuloa uudelleen!");
     }
 
-    private static void kysely(Connection con) throws SQLException {
+    // Suorittaa varsinaisen kyselyn, eli tulostaa satunnaisessa järjestyksessä kymmenen
+    // kysymystä ja niihin liittyvät vaihtoehdot.
+    // Kysyy käyttäjältä vastausta ja selvittää, oliko vastaus oikein vai väärin.
+    private void kysely(Connection con) throws SQLException {
         List<Integer> lista = randomGeneraattori();
 
         for (int i : lista) {
-            tulostaKysymys(con, i);
-            int oikea = tulostaKysymysvaihtoehdot(con, i);
+            t.tulostaKysymys(con, i);
+            int oikea = t.tulostaKysymysvaihtoehdot(con, i);
 
             System.out.print("Anna vastaus: ");
             int vastaus = syotteenKasittely();
@@ -48,33 +58,9 @@ public class KayttoLiittyma {
         }
     }
 
-    private static void tulostaKysymys(Connection con, int kysymyksenIndeksi) throws SQLException {
-        String sql = "SELECT teksti FROM kysymys WHERE id=?";
-        PreparedStatement lause = con.prepareStatement(sql);
-        lause.setInt(1, kysymyksenIndeksi);
-        ResultSet rs = lause.executeQuery();
-        while (rs.next()) {
-            System.out.println(rs.getString(1));
-        }
-    }
-
-    private static int tulostaKysymysvaihtoehdot(Connection con, int kysymyksenIndeksi) throws SQLException {
-        String sql2 = "SELECT * FROM kysymysvaihtoehdot WHERE kysymysID=?";
-        PreparedStatement lause2 = con.prepareStatement(sql2);
-        lause2.setInt(1, kysymyksenIndeksi);
-        ResultSet rs2 = lause2.executeQuery();
-        int k = 1;
-        int oikea = 0;
-        while (rs2.next()) {
-            System.out.println(k + ". " + rs2.getString(2));
-            if (rs2.getInt("oikeavastaus") == 1)
-                oikea = k;
-            k++;
-        }
-        return oikea;
-    }
-
-    private static List<Integer> randomGeneraattori() {
+    // Palauttaa listan, jolla satunnaisessa järjestyksessä luvut 1-10.
+    // Random ei toimi tässä, sillä se ei muista, mitä kysymyksiä on jo kertaalleen tulostanut.
+    private List<Integer> randomGeneraattori() {
         List<Integer> lista = new ArrayList<>();
         lista.add(1);
         lista.add(2);
@@ -90,27 +76,32 @@ public class KayttoLiittyma {
         return lista;
     }
 
-    private static int syotteenKasittely() {
+    // Käsittelee käyttäjän mahdolliset virhesyötteet: tyhjä syöte, välilyönti, kirjain tai väärä numero.
+    // Ohjelman ei siis pitäisi kaatua millään käyttäjän syötteellä.
+    private int syotteenKasittely() {
         Scanner lukija = new Scanner(System.in);
-        int v;
+        int kasiteltyVastaus;
+
         while (true) {
             if (lukija.hasNextLine()) {
                 String vastaus = lukija.nextLine();
 
                 if (vastaus.equals("1") || vastaus.equals("2") || vastaus.equals("3") || vastaus.equals("4")) {
-                    v = Integer.parseInt(vastaus);
+                    kasiteltyVastaus = Integer.parseInt(vastaus);
                     break;
+
                 } else {
                     System.out.println("Syöte ei kelpaa!");
                     System.out.print("Anna vastaus: ");
                     continue;
                 }
+
             } else {
                 System.out.println("Tyhjä syöte!");
                 System.out.print("Anna vastaus: ");
                 continue;
             }
         }
-        return v;
+        return kasiteltyVastaus;
     }
 }
